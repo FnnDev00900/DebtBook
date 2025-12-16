@@ -1,4 +1,4 @@
-package com.fnndev.debtbook.ui.theme
+package com.fnndev.debtbook.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
