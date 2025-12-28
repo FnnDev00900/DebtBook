@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.fnndev.debtbook.presentation.ui.screens.main_menu.MainMenuScreen
 import com.fnndev.debtbook.presentation.ui.theme.DebtBookTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             DebtBookTheme {
-
+                MainMenuScreen()
             }
         }
     }
