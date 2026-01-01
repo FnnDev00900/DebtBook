@@ -18,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,11 +29,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.fnndev.debtbook.R
 import com.fnndev.debtbook.presentation.ui.theme.VazirMatnFont
 
 @Composable
-fun AddOrEditPersonScreen() {
+fun AddOrEditPersonScreen(
+    viewModel: AddEditPersonViewModel = hiltViewModel()
+) {
+
+    val state = viewModel.state.collectAsState()
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Card(
             modifier = Modifier
@@ -60,8 +67,8 @@ fun AddOrEditPersonScreen() {
                     )
 
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = state.value.personFullName,
+                        onValueChange = { viewModel.onEvent(AddEditPersonEvent.OnFullNameChange(it)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp, vertical = 4.dp),
@@ -84,8 +91,8 @@ fun AddOrEditPersonScreen() {
                         ), textStyle = TextStyle(fontFamily = VazirMatnFont)
                     )
                     OutlinedTextField(
-                        value = "",
-                        onValueChange = {},
+                        value = state.value.personMobile,
+                        onValueChange = { viewModel.onEvent(AddEditPersonEvent.OnMobileChange(it)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 8.dp, vertical = 4.dp),
@@ -98,7 +105,8 @@ fun AddOrEditPersonScreen() {
                         )
                     )
 
-                    Button(onClick = {},
+                    Button(
+                        onClick = {},
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp, horizontal = 16.dp)
